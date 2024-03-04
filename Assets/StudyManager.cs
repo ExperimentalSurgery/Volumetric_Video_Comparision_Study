@@ -31,11 +31,14 @@ public class StudyManager : MonoBehaviour
     public Transform podest2;
 
     public GameObject depthkitPlayer;
-    public GameObject gssPlayer1;
-    public GameObject gssPlayer2;
+    public GameObject liveScanPlayer;
+    public GameObject volcapPlayer;
 
     GameObject currentPlayer1;
     GameObject currentPlayer2;
+    Candidates currentLeftCandidate;
+    Candidates currentRightCandidate;
+    compareVariants currentVariant;
 
     public GameObject voteButton1;
     public GameObject voteButton2;
@@ -87,10 +90,10 @@ public class StudyManager : MonoBehaviour
     {
         inTraining = true;
 
-        gssPlayer1.GetComponent<GeometrySequencePlayer>().LoadSequence(trainingVideoBad, GeometrySequenceStream.PathType.AbsolutePath);
-        gssPlayer2.GetComponent<GeometrySequencePlayer>().LoadSequence(trainingVideoGood, GeometrySequenceStream.PathType.AbsolutePath);
+        liveScanPlayer.GetComponent<GeometrySequencePlayer>().LoadSequence(trainingVideoBad, GeometrySequenceStream.PathType.AbsolutePath);
+        volcapPlayer.GetComponent<GeometrySequencePlayer>().LoadSequence(trainingVideoGood, GeometrySequenceStream.PathType.AbsolutePath);
 
-        SetPlayer(gssPlayer1, gssPlayer2);
+        PreparePlayer(liveScanPlayer, volcapPlayer);
 
         StartCoroutine(ComparisionProcedure(10));
 
@@ -196,27 +199,57 @@ public class StudyManager : MonoBehaviour
         {
             case compareVariants.DepthkitToLivescan:
                 SetDepthkitPlayer(currentVideoCollection.DepthkitMeta, currentVideoCollection.DepthkitPoster, currentVideoCollection.DepthkitVideo);
-                gssPlayer1.GetComponent<GeometrySequencePlayer>().LoadSequence(currentVideoCollection.LiveScanVideo, GeometrySequenceStream.PathType.AbsolutePath);
+                liveScanPlayer.GetComponent<GeometrySequencePlayer>().LoadSequence(currentVideoCollection.LiveScanVideo, GeometrySequenceStream.PathType.AbsolutePath);
                 if (leftRight)
-                    SetPlayer(depthkitPlayer, gssPlayer1);
+                {
+                    PreparePlayer(depthkitPlayer, liveScanPlayer);
+                    currentLeftCandidate = Candidates.Depthkit;
+                    currentRightCandidate = Candidates.LiveScan;
+                    currentVariant = compareVariants.DepthkitToLivescan;
+                }
                 else
-                    SetPlayer(gssPlayer1, depthkitPlayer);
-                    break;
+                {
+                    PreparePlayer(liveScanPlayer, depthkitPlayer);
+                    currentLeftCandidate = Candidates.LiveScan;
+                    currentRightCandidate = Candidates.Depthkit;
+                    currentVariant = compareVariants.DepthkitToLivescan;
+                }
+                break;
             case compareVariants.LiveScanToVolcap:
-                gssPlayer1.GetComponent<GeometrySequencePlayer>().LoadSequence(currentVideoCollection.LiveScanVideo, GeometrySequenceStream.PathType.AbsolutePath);
-                gssPlayer2.GetComponent<GeometrySequencePlayer>().LoadSequence(currentVideoCollection.VolCapVideo, GeometrySequenceStream.PathType.AbsolutePath);
+                liveScanPlayer.GetComponent<GeometrySequencePlayer>().LoadSequence(currentVideoCollection.LiveScanVideo, GeometrySequenceStream.PathType.AbsolutePath);
+                volcapPlayer.GetComponent<GeometrySequencePlayer>().LoadSequence(currentVideoCollection.VolCapVideo, GeometrySequenceStream.PathType.AbsolutePath);
                 if (leftRight)
-                    SetPlayer(gssPlayer1, gssPlayer2);
+                {
+                    PreparePlayer(liveScanPlayer, volcapPlayer);
+                    currentLeftCandidate = Candidates.LiveScan;
+                    currentRightCandidate = Candidates.VolCap;
+                    currentVariant = compareVariants.LiveScanToVolcap;
+                }
                 else
-                    SetPlayer(gssPlayer2, gssPlayer1);
+                {
+                    PreparePlayer(volcapPlayer, liveScanPlayer);
+                    currentLeftCandidate = Candidates.VolCap;
+                    currentRightCandidate = Candidates.LiveScan;
+                    currentVariant = compareVariants.LiveScanToVolcap;
+                }
                 break;
             case compareVariants.VolcapToDepthkit:
-                gssPlayer1.GetComponent<GeometrySequencePlayer>().LoadSequence(currentVideoCollection.VolCapVideo, GeometrySequenceStream.PathType.AbsolutePath);
+                volcapPlayer.GetComponent<GeometrySequencePlayer>().LoadSequence(currentVideoCollection.VolCapVideo, GeometrySequenceStream.PathType.AbsolutePath);
                 SetDepthkitPlayer(currentVideoCollection.DepthkitMeta, currentVideoCollection.DepthkitPoster, currentVideoCollection.DepthkitVideo);
                 if (leftRight)
-                    SetPlayer(depthkitPlayer, gssPlayer1);
+                {
+                    PreparePlayer(depthkitPlayer, volcapPlayer);
+                    currentLeftCandidate = Candidates.LiveScan;
+                    currentRightCandidate = Candidates.Depthkit;
+                    currentVariant = compareVariants.VolcapToDepthkit;
+                }
                 else
-                    SetPlayer(gssPlayer1, depthkitPlayer);
+                {
+                    PreparePlayer(volcapPlayer, depthkitPlayer);
+                    currentLeftCandidate = Candidates.LiveScan;
+                    currentRightCandidate = Candidates.Depthkit;
+                    currentVariant = compareVariants.VolcapToDepthkit;
+                }
                 break;
             default: 
                 break;
@@ -263,7 +296,7 @@ public class StudyManager : MonoBehaviour
 
     }
 
-    void SetPlayer(GameObject player1, GameObject player2)
+    void PreparePlayer(GameObject player1, GameObject player2)
     {
         views = 0;
 
