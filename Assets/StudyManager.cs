@@ -1,34 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using Depthkit;
 using UnityEngine.Video;
 using BuildingVolumes.Streaming;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using JetBrains.Annotations;
+using System;
+using System.IO;
 
 public class StudyManager : MonoBehaviour
 {
-    enum compareVariants
+    public enum compareVariants
     {
         DepthkitToLivescan,
+        LiveScanToDepthkit,
         LiveScanToVolcap,
-        VolcapToDepthkit
+        VolcapToLiveScan,
+        VolcapToDepthkit,
+        DepthkitToVolcap
     }
 
-    enum Candidates
+    public enum Candidates
     {
         Depthkit,
         LiveScan,
-        VolCap
+        VolCap,
+        none
+    }
+
+    public enum Sequences
+    {
+        staticHuman,
+        dynamicHuman,
+        objectHuman,
+        hands,
+        jenga
+
     }
 
     public StudyComparisions comparisionList;
     List<compareVariants> currentComparisionVariants;
 
-    public Transform podest1;
-    public Transform podest2;
+    public Vector3 podest1Offset;
+    public Vector3 podest2Offset;
 
     public GameObject depthkitPlayer;
     public GameObject liveScanPlayer;
@@ -39,6 +51,7 @@ public class StudyManager : MonoBehaviour
     Candidates currentLeftCandidate;
     Candidates currentRightCandidate;
     compareVariants currentVariant;
+    Sequences currentSequence;
 
     public GameObject voteButton1;
     public GameObject voteButton2;
@@ -55,8 +68,11 @@ public class StudyManager : MonoBehaviour
 
     public string trainingVideoGood;
     public string trainingVideoBad;
+    public Transform trainingTransGood;
+    public Transform trainingTransBad;
 
     VideoCollection currentVideoCollection;
+    ComparisionVotes comparisionVotes;
 
     int currentComparisionIndex = 0;
     int currentComparisionVariantIndex = 0;
@@ -84,16 +100,18 @@ public class StudyManager : MonoBehaviour
 
         currentComparisionIndex = 0;
         currentComparisionVariantIndex = 0;
+
+        comparisionVotes = new ComparisionVotes();
     }
 
     public void StartTraining()
     {
         inTraining = true;
 
-        liveScanPlayer.GetComponent<GeometrySequencePlayer>().LoadSequence(trainingVideoBad, GeometrySequenceStream.PathType.AbsolutePath);
-        volcapPlayer.GetComponent<GeometrySequencePlayer>().LoadSequence(trainingVideoGood, GeometrySequenceStream.PathType.AbsolutePath);
+        liveScanPlayer.GetComponent<GeometrySequencePlayer>().OpenSequence(trainingVideoBad, GeometrySequenceStream.PathType.AbsolutePath);
+        volcapPlayer.GetComponent<GeometrySequencePlayer>().OpenSequence(trainingVideoGood, GeometrySequenceStream.PathType.AbsolutePath);
 
-        PreparePlayer(liveScanPlayer, volcapPlayer);
+        PreparePlayer(liveScanPlayer, volcapPlayer, trainingTransGood, trainingTransBad);
 
         StartCoroutine(ComparisionProcedure(10));
 
@@ -110,7 +128,7 @@ public class StudyManager : MonoBehaviour
     }
 
     public void StartStudy()
-    {        
+    {
         currentComparisionVariants = CreateCompareVariants(comparisionList.comparisionScenes[currentComparisionIndex]);
         StartCoroutine(ShowNextComparision());
     }
@@ -118,10 +136,10 @@ public class StudyManager : MonoBehaviour
     List<compareVariants> CreateCompareVariants(VideoCollection availableVideos)
     {
         List<compareVariants> variants = new List<compareVariants>();
-        if (availableVideos.VolCapVideo == null)
-            variants = new List<compareVariants> { compareVariants.DepthkitToLivescan};
+        if (availableVideos.VolCapVideo.Length < 1)
+            variants = new List<compareVariants> { compareVariants.DepthkitToLivescan, compareVariants.LiveScanToDepthkit };
         else
-            variants = new List<compareVariants> { compareVariants.DepthkitToLivescan, compareVariants.LiveScanToVolcap, compareVariants.VolcapToDepthkit };
+            variants = new List<compareVariants> { compareVariants.DepthkitToLivescan, compareVariants.LiveScanToDepthkit, compareVariants.LiveScanToVolcap, compareVariants.VolcapToLiveScan, compareVariants.VolcapToDepthkit, compareVariants.DepthkitToVolcap };
 
         variants.Shuffle();
 
@@ -139,6 +157,10 @@ public class StudyManager : MonoBehaviour
 
     public void RatingButtonClickedLeft()
     {
+        print("Voted for: " + currentLeftCandidate.ToString());
+        RecordVote(currentVariant, currentLeftCandidate, currentSequence, comparisionVotes);
+        string json = JsonUtility.ToJson(comparisionVotes);
+
         if (inTraining)
             ShowPostTrainingHint();
 
@@ -153,6 +175,10 @@ public class StudyManager : MonoBehaviour
 
     public void RatingButtonClickedRight()
     {
+        print("Voted for: " + currentRightCandidate.ToString());
+        RecordVote(currentVariant, currentRightCandidate, currentSequence, comparisionVotes);
+
+
         if (inTraining)
             ShowPostTrainingHint();
 
@@ -180,78 +206,89 @@ public class StudyManager : MonoBehaviour
         if (currentComparisionVariantIndex >= currentComparisionVariants.Count)
         {
             currentComparisionIndex++;
-            currentComparisionVariantIndex = 0;
-            currentComparisionVariants = CreateCompareVariants(comparisionList.comparisionScenes[currentComparisionIndex]);
 
             if (currentComparisionIndex >= comparisionList.comparisionScenes.Count)
             {
                 EndStudy();
                 yield break;
             }
+
+            currentComparisionVariantIndex = 0;
+            currentComparisionVariants = CreateCompareVariants(comparisionList.comparisionScenes[currentComparisionIndex]);
         }
 
         currentVideoCollection = comparisionList.comparisionScenes[currentComparisionIndex];
         compareVariants variant = currentComparisionVariants[currentComparisionVariantIndex];
-        bool leftRight = Random.Range(0,1) > 0.5f? true: false;
+        currentSequence = comparisionList.comparisionScenes[currentComparisionIndex].sequence;
+
+        liveScanPlayer.GetComponent<GeometrySequencePlayer>().Hide();
+        volcapPlayer.GetComponent<GeometrySequencePlayer>().Hide();
+        depthkitPlayer.GetComponent<Depthkit.StudioLook>().enabled = false;
 
 
-        switch (variant) 
+        switch (variant)
         {
             case compareVariants.DepthkitToLivescan:
                 SetDepthkitPlayer(currentVideoCollection.DepthkitMeta, currentVideoCollection.DepthkitPoster, currentVideoCollection.DepthkitVideo);
-                liveScanPlayer.GetComponent<GeometrySequencePlayer>().LoadSequence(currentVideoCollection.LiveScanVideo, GeometrySequenceStream.PathType.AbsolutePath);
-                if (leftRight)
-                {
-                    PreparePlayer(depthkitPlayer, liveScanPlayer);
-                    currentLeftCandidate = Candidates.Depthkit;
-                    currentRightCandidate = Candidates.LiveScan;
-                    currentVariant = compareVariants.DepthkitToLivescan;
-                }
-                else
-                {
-                    PreparePlayer(liveScanPlayer, depthkitPlayer);
-                    currentLeftCandidate = Candidates.LiveScan;
-                    currentRightCandidate = Candidates.Depthkit;
-                    currentVariant = compareVariants.DepthkitToLivescan;
-                }
+                liveScanPlayer.GetComponent<GeometrySequencePlayer>().OpenSequence(currentVideoCollection.LiveScanVideo, GeometrySequenceStream.PathType.AbsolutePath);
+
+                PreparePlayer(depthkitPlayer, liveScanPlayer, currentVideoCollection.DepthkitTransform, currentVideoCollection.LiveScanTransform);
+                currentLeftCandidate = Candidates.Depthkit;
+                currentRightCandidate = Candidates.LiveScan;
+                currentVariant = compareVariants.DepthkitToLivescan;
+                print("Comparing Depthkit (left) to Livescan (right)");
+                break;
+            case compareVariants.LiveScanToDepthkit:
+                SetDepthkitPlayer(currentVideoCollection.DepthkitMeta, currentVideoCollection.DepthkitPoster, currentVideoCollection.DepthkitVideo);
+                liveScanPlayer.GetComponent<GeometrySequencePlayer>().OpenSequence(currentVideoCollection.LiveScanVideo, GeometrySequenceStream.PathType.AbsolutePath);
+
+                PreparePlayer(liveScanPlayer, depthkitPlayer, currentVideoCollection.LiveScanTransform, currentVideoCollection.DepthkitTransform);
+                currentLeftCandidate = Candidates.LiveScan;
+                currentRightCandidate = Candidates.Depthkit;
+                currentVariant = compareVariants.LiveScanToDepthkit;
+                print("Comparing Livescan (left) to Depthkit (right) ");
                 break;
             case compareVariants.LiveScanToVolcap:
-                liveScanPlayer.GetComponent<GeometrySequencePlayer>().LoadSequence(currentVideoCollection.LiveScanVideo, GeometrySequenceStream.PathType.AbsolutePath);
-                volcapPlayer.GetComponent<GeometrySequencePlayer>().LoadSequence(currentVideoCollection.VolCapVideo, GeometrySequenceStream.PathType.AbsolutePath);
-                if (leftRight)
-                {
-                    PreparePlayer(liveScanPlayer, volcapPlayer);
-                    currentLeftCandidate = Candidates.LiveScan;
-                    currentRightCandidate = Candidates.VolCap;
-                    currentVariant = compareVariants.LiveScanToVolcap;
-                }
-                else
-                {
-                    PreparePlayer(volcapPlayer, liveScanPlayer);
-                    currentLeftCandidate = Candidates.VolCap;
-                    currentRightCandidate = Candidates.LiveScan;
-                    currentVariant = compareVariants.LiveScanToVolcap;
-                }
+                liveScanPlayer.GetComponent<GeometrySequencePlayer>().OpenSequence(currentVideoCollection.LiveScanVideo, GeometrySequenceStream.PathType.AbsolutePath);
+                volcapPlayer.GetComponent<GeometrySequencePlayer>().OpenSequence(currentVideoCollection.VolCapVideo, GeometrySequenceStream.PathType.AbsolutePath);
+
+                PreparePlayer(liveScanPlayer, volcapPlayer, currentVideoCollection.LiveScanTransform, currentVideoCollection.VolcapTransform);
+                currentLeftCandidate = Candidates.LiveScan;
+                currentRightCandidate = Candidates.VolCap;
+                currentVariant = compareVariants.LiveScanToVolcap;
+                print("Comparing LiveScan (left) to Volcap (right)");
+                break;
+            case compareVariants.VolcapToLiveScan:
+                liveScanPlayer.GetComponent<GeometrySequencePlayer>().OpenSequence(currentVideoCollection.LiveScanVideo, GeometrySequenceStream.PathType.AbsolutePath);
+                volcapPlayer.GetComponent<GeometrySequencePlayer>().OpenSequence(currentVideoCollection.VolCapVideo, GeometrySequenceStream.PathType.AbsolutePath);
+
+                PreparePlayer(volcapPlayer, liveScanPlayer, currentVideoCollection.VolcapTransform, currentVideoCollection.LiveScanTransform);
+                currentLeftCandidate = Candidates.VolCap;
+                currentRightCandidate = Candidates.LiveScan;
+                currentVariant = compareVariants.VolcapToLiveScan;
+                print("Comparing Volcap (left) to Livescan (right)");
+                break;
+            case compareVariants.DepthkitToVolcap:
+                volcapPlayer.GetComponent<GeometrySequencePlayer>().OpenSequence(currentVideoCollection.VolCapVideo, GeometrySequenceStream.PathType.AbsolutePath);
+                SetDepthkitPlayer(currentVideoCollection.DepthkitMeta, currentVideoCollection.DepthkitPoster, currentVideoCollection.DepthkitVideo);
+
+                PreparePlayer(depthkitPlayer, volcapPlayer, currentVideoCollection.DepthkitTransform, currentVideoCollection.VolcapTransform);
+                currentLeftCandidate = Candidates.Depthkit;
+                currentRightCandidate = Candidates.VolCap;
+                currentVariant = compareVariants.DepthkitToVolcap;
+                print("Comparing Depthkit (left) to Volcap (right)");
                 break;
             case compareVariants.VolcapToDepthkit:
-                volcapPlayer.GetComponent<GeometrySequencePlayer>().LoadSequence(currentVideoCollection.VolCapVideo, GeometrySequenceStream.PathType.AbsolutePath);
+                volcapPlayer.GetComponent<GeometrySequencePlayer>().OpenSequence(currentVideoCollection.VolCapVideo, GeometrySequenceStream.PathType.AbsolutePath);
                 SetDepthkitPlayer(currentVideoCollection.DepthkitMeta, currentVideoCollection.DepthkitPoster, currentVideoCollection.DepthkitVideo);
-                if (leftRight)
-                {
-                    PreparePlayer(depthkitPlayer, volcapPlayer);
-                    currentLeftCandidate = Candidates.LiveScan;
-                    currentRightCandidate = Candidates.Depthkit;
-                    currentVariant = compareVariants.VolcapToDepthkit;
-                }
-                else
-                {
-                    PreparePlayer(volcapPlayer, depthkitPlayer);
-                    currentLeftCandidate = Candidates.LiveScan;
-                    currentRightCandidate = Candidates.Depthkit;
-                    currentVariant = compareVariants.VolcapToDepthkit;
-                }
+
+                PreparePlayer(volcapPlayer, depthkitPlayer, currentVideoCollection.VolcapTransform, currentVideoCollection.DepthkitTransform);
+                currentLeftCandidate = Candidates.VolCap;
+                currentRightCandidate = Candidates.Depthkit;
+                currentVariant = compareVariants.VolcapToDepthkit;
+                print("Comparing Volcap (left) to Depthkit (right)");
                 break;
-            default: 
+            default:
                 break;
         }
 
@@ -265,7 +302,7 @@ public class StudyManager : MonoBehaviour
         Depthkit.Clip clip = depthkitPlayer.GetComponent<Depthkit.Clip>();
         clip.metadataFile = meta;
         clip.poster = poster;
-        depthkitPlayer.GetComponent<VideoPlayer>().clip = video;            
+        depthkitPlayer.GetComponent<VideoPlayer>().clip = video;
     }
 
     IEnumerator ComparisionProcedure(float videoLength)
@@ -280,7 +317,6 @@ public class StudyManager : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
 
         PlayComparisionFromStart();
-        print(videoLength);
         yield return new WaitForSeconds(videoLength);
         StopComparision();
         ShowRating();
@@ -293,30 +329,31 @@ public class StudyManager : MonoBehaviour
 
     void EndStudy()
     {
+        EndStudyHint.SetActive(true);
+        string json = JsonUtility.ToJson(comparisionVotes);
+        string guid = Guid.NewGuid().ToString();
 
+        System.IO.File.WriteAllText(Application.dataPath + "\\..\\..\\Results\\" + guid + ".json", json);
     }
 
-    void PreparePlayer(GameObject player1, GameObject player2)
+    void PreparePlayer(GameObject player1, GameObject player2, Transform posPlayer1, Transform posPlayer2)
     {
         views = 0;
 
         currentPlayer1 = player1;
         currentPlayer2 = player2;
 
-        player1.SetActive(true);
-        player2.SetActive(true);
+        player1.transform.position = posPlayer1.position;
+        player1.transform.rotation = posPlayer1.rotation;
+        player1.transform.localScale = posPlayer1.localScale;
+        player1.transform.position += podest1Offset;
 
-        Vector3 player1Pos = player1.transform.position;
-        Vector3 player2Pos = player2.transform.position;
+        player2.transform.position = posPlayer2.position;
+        player2.transform.rotation = posPlayer2.rotation;
+        player2.transform.localScale = posPlayer2.localScale;
+        player2.transform.position += podest2Offset;
 
-        player1Pos.x = podest1.position.x;
-        player1Pos.z = podest1.position.z;
-
-        player2Pos.x = podest2.position.x;
-        player2Pos.z = podest2.position.z;
-
-        player1.transform.position = player1Pos;
-        player2.transform.position = player2Pos;
+        Debug.Log("Player prepared!");
     }
 
     public void PlayComparisionFromStart()
@@ -328,6 +365,7 @@ public class StudyManager : MonoBehaviour
 
         if (currentPlayer1.GetComponent<VideoPlayer>() != null)
         {
+            currentPlayer1.GetComponent<Depthkit.StudioLook>().enabled = true;
             currentPlayer1.GetComponent<VideoPlayer>().Stop();
             currentPlayer1.GetComponent<VideoPlayer>().Play();
         }
@@ -335,16 +373,20 @@ public class StudyManager : MonoBehaviour
         else
         {
             currentPlayer1.GetComponent<GeometrySequencePlayer>().PlayFromStart();
+            currentPlayer1.GetComponent<GeometrySequencePlayer>().Show();
         }
 
         if (currentPlayer2.GetComponent<VideoPlayer>() != null)
         {
+            currentPlayer2.GetComponent<Depthkit.StudioLook>().enabled = true;
+            currentPlayer2.GetComponent<VideoPlayer>().Stop();
             currentPlayer2.GetComponent<VideoPlayer>().Play();
         }
 
         else
         {
             currentPlayer2.GetComponent<GeometrySequencePlayer>().PlayFromStart();
+            currentPlayer2.GetComponent<GeometrySequencePlayer>().Show();
         }
 
     }
@@ -354,25 +396,31 @@ public class StudyManager : MonoBehaviour
         if (currentPlayer1.GetComponent<VideoPlayer>() != null)
         {
             currentPlayer1.GetComponent<VideoPlayer>().Stop();
+            currentPlayer1.GetComponent<Depthkit.StudioLook>().enabled = false;
         }
 
         else
         {
             currentPlayer1.GetComponent<GeometrySequencePlayer>().Pause();
+            currentPlayer1.GetComponent<GeometrySequencePlayer>().Hide();
         }
 
         if (currentPlayer2.GetComponent<VideoPlayer>() != null)
         {
             currentPlayer2.GetComponent<VideoPlayer>().Stop();
+            currentPlayer2.GetComponent<Depthkit.StudioLook>().enabled = false;
         }
 
         else
         {
             currentPlayer2.GetComponent<GeometrySequencePlayer>().Pause();
+            currentPlayer2.GetComponent<GeometrySequencePlayer>().Hide();
         }
+    }
 
-        currentPlayer1.SetActive(false);
-        currentPlayer2.SetActive(false);
+    void RecordVote(compareVariants variant, Candidates choosenCandidate, Sequences sequence, ComparisionVotes votes)
+    {
+        comparisionVotes.Votes.Add(new Vote(sequence, variant, choosenCandidate));
     }
 
 
@@ -396,3 +444,27 @@ public static class Extensions
         }
     }
 }
+
+[Serializable]
+public class ComparisionVotes
+{
+    public List<Vote> Votes = new List<Vote>();
+}
+
+[Serializable]
+public class Vote
+{
+    public StudyManager.Sequences sequence;
+    public StudyManager.compareVariants variant;
+    public StudyManager.Candidates votedForCandidate;
+
+    public Vote(StudyManager.Sequences sequence, StudyManager.compareVariants variant, StudyManager.Candidates votedFor)
+    {
+        this.sequence = sequence;
+        this.variant = variant;
+        this.votedForCandidate = votedFor;
+
+    }
+    
+}
+

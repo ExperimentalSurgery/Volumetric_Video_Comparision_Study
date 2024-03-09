@@ -1,0 +1,981 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414738, b: 0.121078536, a: 1}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 12
+  m_GIWorkflowMode: 1
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 1
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 512
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 256
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVREnvironmentMIS: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
+  m_LightingDataAsset: {fileID: 0}
+  m_LightingSettings: {fileID: 0}
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 3
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    buildHeightMesh: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &342961046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 342961054}
+  - component: {fileID: 342961053}
+  - component: {fileID: 342961051}
+  - component: {fileID: 342961050}
+  - component: {fileID: 342961049}
+  - component: {fileID: 342961048}
+  - component: {fileID: 342961047}
+  - component: {fileID: 342961055}
+  m_Layer: 0
+  m_Name: Depthkit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &342961047
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342961046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c39bca641cdaf46a71dcfdeb31fe85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bIsSetup: 1
+  m_parent: root
+  recalculateCurrentSurfaceTriangleCount: 0
+  m_subMeshMaxTriangles: 00000000
+  m_useTriangleMesh: 0
+  radialBias: 0
+  radialBiasPersp:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  radialBiasPerspInMeters:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  pauseDataGenerationWhenInvisible: 0
+  pausePlayerWhenInvisible: 0
+  generationMethod: 0
+  showVolumePreview: 0
+  volumePreviewAlpha: 0.02
+  volumePreviewPointSize: 1
+  automaticLevelOfDetail: 0
+  levelOfDetailDistance: 1
+  m_volumeBounds:
+    m_Center: {x: 0.0812774, y: 1, z: 0}
+    m_Extent: {x: 0.4187223, y: 1, z: 0.5}
+  m_volumeDensity: 100
+  m_voxelGridDimensions: {x: 83, y: 200, z: 100}
+  m_totalVoxelCount: 1660000
+  surfaceSmoothingRadius: 0.3
+  enableSurfaceSmoothing: 0
+  showLevelOfDetailGizmo: 0
+  surfaceSensitivity: 0.1
+  weightUnknown: 0.005
+  weightUnseenMax: 1
+  weightUnseenMin: 0.0025
+  weightUnseenFalloffPower: 10
+  weightInFrontMax: 1
+  weightInFrontMin: 0.1
+  volumeViewpoint: {fileID: 0}
+  surfaceNormalColorBlendingPower: 10
+  perViewDisparityThreshold: 0.0125
+  perViewDisparityBlendWidth: 0.025
+  disparityMin: 0
+  globalViewDependentColorBlendWeight: 0.001
+  globalViewDependentGeometryBlendWeight: 1
+  enableViewDependentGeometry: 0
+  untexturedFragmentSetting: 0
+  untexturedColor: {r: 0, g: 0, b: 0, a: 1}
+  perspectiveColorBlendingData:
+    m_data:
+    - enabled: 1
+      viewWeightPowerContribution: 1
+    - enabled: 1
+      viewWeightPowerContribution: 1
+    - enabled: 1
+      viewWeightPowerContribution: 1
+    - enabled: 1
+      viewWeightPowerContribution: 1
+    - enabled: 1
+      viewWeightPowerContribution: 1
+    m_name: Depthkit Per Perspective Color Blending Data
+  perspectiveGeometryData:
+    m_data:
+    - enabled: 1
+      overrideWeightUnknown: 0
+      weightUnknown: 0.005
+      viewDependentUnseenAmount: 1
+      viewDependentInFrontAmount: 1
+      viewDependentWeight: 1
+    - enabled: 1
+      overrideWeightUnknown: 0
+      weightUnknown: 0.005
+      viewDependentUnseenAmount: 1
+      viewDependentInFrontAmount: 1
+      viewDependentWeight: 1
+    - enabled: 1
+      overrideWeightUnknown: 0
+      weightUnknown: 0.005
+      viewDependentUnseenAmount: 1
+      viewDependentInFrontAmount: 1
+      viewDependentWeight: 1
+    - enabled: 1
+      overrideWeightUnknown: 0
+      weightUnknown: 0.005
+      viewDependentUnseenAmount: 1
+      viewDependentInFrontAmount: 1
+      viewDependentWeight: 1
+    - enabled: 1
+      overrideWeightUnknown: 0
+      weightUnknown: 0.005
+      viewDependentUnseenAmount: 1
+      viewDependentInFrontAmount: 1
+      viewDependentWeight: 1
+    m_name: Depthkit Per Perspective Geometry Data
+    m_geometryMatchesColorWeights: 0000000000
+    m_viewDependentContributions:
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+  overrideRadialBias: 
+  perspectivesCount: 0
+  normalWeightResolutionReduction: 1
+  showPerspectiveGizmo: 0000000000
+  maskGenerator:
+    clip: {fileID: 342961051}
+    externalSourceTexture: {fileID: 0}
+    scale: 1
+    m_maskTextureFormat: 14
+    useStudioCoefficients: 1
+    enableMaskDebug: 0
+    m_blurFilter:
+      clip: {fileID: 342961051}
+      radius: 0.019422311
+      slices: 5
+    sobelMultiplier: 55.180283
+    m_downScale: 0
+  m_enableEdgeMask: 1
+--- !u!82 &342961048
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342961046}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!328 &342961049
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342961046}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: f6b6b88f927288d46975eb27d4fcb0b9, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: c594c1c36efd9e14f8aa4609c5fd857f, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 1
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
+--- !u!114 &342961050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342961046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d45f7d508d0a14884bec1201260eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mediaPlayer: {fileID: 342961049}
+  m_audioSource: {fileID: 342961048}
+--- !u!114 &342961051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342961046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4fa781ea55830e408ba83c0f9d07c4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_metadataFilePath: 
+  m_metadataFile: {fileID: 4900000, guid: 83e0c017e28238e4292817dca18f168c, type: 3}
+  m_metadataSourceType: 0
+  m_metadata:
+    _versionMajor: 0
+    _versionMinor: 5
+    format: perpixel
+    textureWidth: 4092
+    textureHeight: 4096
+    boundsCenter: {x: 0, y: 1, z: -0}
+    boundsSize: {x: 2, y: 2, z: 2}
+    perspectives:
+    - depthImageSize: {x: 1920, y: 1080}
+      depthPrincipalPoint: {x: 959.5751, y: 552.2175}
+      depthFocalLength: {x: 909.3166, y: 909.02203}
+      farClip: 2.418426
+      nearClip: 0.32199875
+      extrinsics:
+        e00: 0.4626193
+        e01: -0.88654137
+        e02: 0.005268901
+        e03: -0.09251116
+        e10: -0.03650626
+        e11: -0.024987264
+        e12: -0.999021
+        e13: 2.3667862
+        e20: 0.8858051
+        e21: 0.46197405
+        e22: -0.0439239
+        e23: 0.09737316
+        e30: 0
+        e31: 0
+        e32: 0
+        e33: 1
+      extrinsicsInv:
+        e00: 0.4626193
+        e01: -0.036506254
+        e02: 0.88580513
+        e03: 0.042946316
+        e10: -0.88654137
+        e11: -0.024987264
+        e12: 0.46197408
+        e13: -0.06785934
+        e20: 0.0052688997
+        e21: -0.99902093
+        e22: -0.0439239
+        e23: 2.3692334
+        e30: 0
+        e31: 0
+        e32: 0
+        e33: 1
+      crop: {x: 0, y: 0, z: 1, w: 1}
+      clipEpsilon: 0.00238501
+      cameraNormal: {x: 0.005268901, y: -0.999021, z: -0.0439239}
+      cameraCenter: {x: -0.09251116, y: 2.3667862, z: 0.09737316}
+    - depthImageSize: {x: 1920, y: 1080}
+      depthPrincipalPoint: {x: 958.0741, y: 550.6581}
+      depthFocalLength: {x: 914.0945, y: 914.1472}
+      farClip: 3.2736633
+      nearClip: 0.683835
+      extrinsics:
+        e00: -0.99804693
+        e01: -0.0018448769
+        e02: 0.062441047
+        e03: -0.17041998
+        e10: -0.015256569
+        e11: -0.96209586
+        e12: -0.27228436
+        e13: 1.3436345
+        e20: 0.060576603
+        e21: -0.27270523
+        e22: 0.9601887
+        e23: -1.9522637
+        e30: 0
+        e31: 0
+        e32: 0
+        e33: 1
+      extrinsicsInv:
+        e00: -0.99804705
+        e01: -0.01525657
+        e02: 0.060576607
+        e03: -0.03132639
+        e10: -0.0018448754
+        e11: -0.96209586
+        e12: -0.2727052
+        e13: 0.7599982
+        e20: 0.062441044
+        e21: -0.27228436
+        e22: 0.9601887
+        e23: 2.2510333
+        e30: 0
+        e31: 0
+        e32: 0
+        e33: 1
+      crop: {x: 0, y: 0, z: 1, w: 1}
+      clipEpsilon: 0.00193063
+      cameraNormal: {x: 0.062441047, y: -0.27228436, z: 0.9601887}
+      cameraCenter: {x: -0.17041998, y: 1.3436345, z: -1.9522637}
+    - depthImageSize: {x: 1920, y: 1080}
+      depthPrincipalPoint: {x: 956.93195, y: 549.176}
+      depthFocalLength: {x: 921.091, y: 920.89276}
+      farClip: 3.2820148
+      nearClip: 0.5640387
+      extrinsics:
+        e00: -0.17073923
+        e01: -0.2347792
+        e02: 0.9569362
+        e03: -1.8802278
+        e10: -0.02594106
+        e11: -0.96978927
+        e12: -0.2425611
+        e13: 1.3325807
+        e20: 0.9849747
+        e21: -0.066238634
+        e22: 0.15949064
+        e23: -0.2702194
+        e30: 0
+        e31: 0
+        e32: 0
+        e33: 1
+      extrinsicsInv:
+        e00: -0.17073923
+        e01: -0.025941068
+        e02: 0.98497474
+        e03: -0.020300815
+        e10: -0.2347792
+        e11: -0.96978927
+        e12: -0.066238634
+        e13: 0.83298516
+        e20: 0.9569362
+        e21: -0.24256109
+        e22: 0.15949064
+        e23: 2.1655877
+        e30: 0
+        e31: 0
+        e32: 0
+        e33: 1
+      crop: {x: 0, y: 0, z: 1, w: 1}
+      clipEpsilon: 0.0018396041
+      cameraNormal: {x: 0.9569362, y: -0.2425611, z: 0.15949064}
+      cameraCenter: {x: -1.8802278, y: 1.3325807, z: -0.2702194}
+    - depthImageSize: {x: 1920, y: 1080}
+      depthPrincipalPoint: {x: 956.44995, y: 550.183}
+      depthFocalLength: {x: 917.90906, y: 917.4575}
+      farClip: 3.3221135
+      nearClip: 0.504164
+      extrinsics:
+        e00: 0.26082024
+        e01: 0.20040734
+        e02: -0.94435674
+        e03: 1.8576256
+        e10: -0.05189813
+        e11: -0.97389007
+        e12: -0.22100842
+        e13: 1.3264167
+        e20: -0.9639914
+        e21: 0.106653824
+        e22: -0.24360947
+        e23: 0.35604778
+        e30: 0
+        e31: 0
+        e32: 0
+        e33: 1
+      extrinsicsInv:
+        e00: 0.2608202
+        e01: -0.051898133
+        e02: -0.96399134
+        e03: -0.07244088
+        e10: 0.20040734
+        e11: -0.97389007
+        e12: 0.10665382
+        e13: 0.8815283
+        e20: -0.9443568
+        e21: -0.22100843
+        e22: -0.24360947
+        e23: 2.1341474
+        e30: 0
+        e31: 0
+        e32: 0
+        e33: 1
+      crop: {x: 0, y: 0, z: 1, w: 1}
+      clipEpsilon: 0.0017743397
+      cameraNormal: {x: -0.9443568, y: -0.22100843, z: -0.24360949}
+      cameraCenter: {x: 1.8576256, y: 1.3264167, z: 0.35604778}
+    - depthImageSize: {x: 1920, y: 1080}
+      depthPrincipalPoint: {x: 957.6109, y: 552.6117}
+      depthFocalLength: {x: 916.9557, y: 916.47723}
+      farClip: 3.1822236
+      nearClip: 0.6954221
+      extrinsics:
+        e00: 0.99686825
+        e01: 0.014101591
+        e02: 0.077812925
+        e03: -0.17177565
+        e10: 0.028423455
+        e11: -0.9821095
+        e12: -0.18615331
+        e13: 1.2536765
+        e20: 0.07379576
+        e21: 0.18778203
+        e22: -0.97943455
+        e23: 1.9176714
+        e30: 0
+        e31: 0
+        e32: 0
+        e33: 1
+      extrinsicsInv:
+        e00: 0.99686825
+        e01: 0.028423456
+        e02: 0.073795766
+        e03: -0.0059121596
+        e10: 0.014101591
+        e11: -0.9821095
+        e12: 0.18778206
+        e13: 0.87356573
+        e20: 0.077812925
+        e21: -0.18615332
+        e22: -0.97943467
+        e23: 2.1249764
+        e30: 0
+        e31: 0
+        e32: 0
+        e33: 1
+      crop: {x: 0, y: 0, z: 1, w: 1}
+      clipEpsilon: 0.0020106148
+      cameraNormal: {x: 0.07781293, y: -0.18615332, z: -0.9794346}
+      cameraCenter: {x: -0.17177565, y: 1.2536765, z: 1.9176714}
+    perspectivesCount: 5
+    numRows: 2
+    numColumns: 3
+    numAngles: 5
+    defaultReconstructionSettings:
+      depthBiasAdjustment: 0
+      edgeMaskBlurAmount: 0.019422311
+      edgeMaskSobelMultiplier: 55.180283
+      surfaceNormalColorBlendPower: 10.001
+      viewDependentColorBlendPower: 0.001
+  m_perspectiveDataBuffer:
+    m_name: Depthkit Perspective Data Buffer
+  m_player: {fileID: 342961050}
+  m_poster: {fileID: 2800000, guid: fdea278d3c0043c48b70f0d03b40e684, type: 3}
+  m_disablePoster: 0
+--- !u!65 &342961053
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342961046}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8374446, y: 2, z: 1}
+  m_Center: {x: 0.0812774, y: 1, z: 0}
+--- !u!4 &342961054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342961046}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.19562347, y: 0.74676573, z: 1.3551536}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &342961055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342961046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ecc1bf60b3d3d41b59c6fb40121b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  depthkitClip: {fileID: 342961051}
+  showPerViewColorDebug: 0
+  showCameraFrustums: 0
+  meshSource: {fileID: 342961047}
+  m_collider: {fileID: 342961053}
+  shadowCastingMode: 1
+  receiveShadows: 1
+  interpolateLightProbes: 1
+  anchorOverride: {fileID: 0}
+  lookMaterial: {fileID: 1970006309}
+--- !u!1 &1469787897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1469787900}
+  - component: {fileID: 1469787899}
+  - component: {fileID: 1469787898}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!81 &1469787898
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469787897}
+  m_Enabled: 1
+--- !u!20 &1469787899
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469787897}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &1469787900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469787897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.17521551, y: 1.896, z: -0.174}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1613846124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1613846128}
+  - component: {fileID: 1613846127}
+  - component: {fileID: 1613846126}
+  - component: {fileID: 1613846125}
+  m_Layer: 0
+  m_Name: Plane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!64 &1613846125
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613846124}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1613846126
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613846124}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: f3b76e67a53feb44680d6d01ed556593, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1613846127
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613846124}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1613846128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613846124}
+  m_LocalRotation: {x: 0.6087605, y: -0, z: -0, w: 0.79335415}
+  m_LocalPosition: {x: 0.22, y: 2.0396504, z: -1.32}
+  m_LocalScale: {x: 0.38128, y: 0.38128, z: 0.38128}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 75, y: 0, z: 0}
+--- !u!21 &1970006309
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Depthkit/Studio/Depthkit Studio Photo Look Built-in RP
+  m_Shader: {fileID: 4800000, guid: 7b24078afb471f94199f84c678e7f250, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - DK_UNTEXTURED_FRAGMENT_INFER
+  - DK_USE_EDGEMASK
+  - DK_USE_LIGHTPROBES
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - DK_UNTEXTURED_FRAGMENT: 0
+    - _DebugColor: 0
+    - _DebugEdgeMask: 0
+    - _EdgeMask: 0
+    - _NoMainLight: 0
+    - _SampleProbes: 1
+    - _ShadowAmount: 1
+    m_Colors: []
+  m_BuildTextureStacks: []

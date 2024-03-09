@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.buildingvolumes.geometry_sequence_streaming": "https://github.com/BuildingVolumes/Geometry_Sequence_Streaming_Package.git",
+    "com.buildingvolumes.geometry_sequence_streaming": "file:C:/Users/Christopher/Desktop/Volcapture/Visualization/Unity_Geometry_Sequence_Streaming/Geometry_Sequence_Streaming_Package",
     "com.microsoft.mrtk.graphicstools.unity": "file:MixedReality/com.microsoft.mrtk.graphicstools.unity-0.5.12.tgz",
     "com.unity.cloud.gltfast": "6.2.0",
     "com.unity.cloud.ktx": "3.2.2",
@@ -12,8 +12,8 @@
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.9.1",
     "com.unity.xr.openxr": "1.9.1",
-    "nyc.scatter.depthkit.core": "file:../Depthkit_Packages/Depthkit_Expansion_Package_Phase9_062223/depthkit.core",
-    "nyc.scatter.depthkit.studio": "file:../Depthkit_Packages/Depthkit_Expansion_Package_Phase9_062223/depthkit.studio",
+    "nyc.scatter.depthkit.core": "file:C:/Users/Christopher/Downloads/Depthkit_Expansion_Package_Phase10_021524/Depthkit_Expansion_Package_Phase10_021524/depthkit.core",
+    "nyc.scatter.depthkit.studio": "file:C:/Users/Christopher/Downloads/Depthkit_Expansion_Package_Phase10_021524/Depthkit_Expansion_Package_Phase10_021524/depthkit.studio",
     "org.mixedrealitytoolkit.core": "file:MixedReality/org.mixedrealitytoolkit.core-3.1.1.tgz",
     "org.mixedrealitytoolkit.extendedassets": "file:MixedReality/org.mixedrealitytoolkit.extendedassets-3.0.1.tgz",
     "org.mixedrealitytoolkit.input": "file:MixedReality/org.mixedrealitytoolkit.input-3.1.0.tgz",

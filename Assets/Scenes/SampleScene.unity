@@ -1327,14 +1327,13 @@ Transform:
   - {fileID: 984105030}
   - {fileID: 1117351297}
   - {fileID: 407751544}
-  - {fileID: 1182223903}
   - {fileID: 1501899884}
   - {fileID: 3604713248258061394}
   - {fileID: 621584805}
   - {fileID: 1410784804}
   - {fileID: 934945317}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &211656590
 GameObject:
@@ -6352,6 +6351,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 873122268}
+  - component: {fileID: 873122270}
+  - component: {fileID: 873122269}
   m_Layer: 0
   m_Name: GSS_Player2
   m_TagString: Untagged
@@ -6372,8 +6373,53 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &873122269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873122267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0885a5fe3a56cf04690a8fc44a1380a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentTransform: {fileID: 873122268}
+  bufferSize: 30
+  useAllThreads: 1
+  threadCount: 4
+  pointcloudMaterial: {fileID: 2100000, guid: bbcad6c3341b77645b06192a47c07027, type: 2}
+  meshMaterial: {fileID: 2100000, guid: da8d29e60762f8c4d885f92ca00fc376, type: 2}
+  frameDropped: 0
+  currentFrameIndex: 0
+  targetFrameTimeMs: 0
+  elapsedMsSinceLastFrame: 0
+  smoothedFPS: 0
+  texture: {fileID: 0}
+--- !u!114 &873122270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873122267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2731264125d1524693cb97001b1cfc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  relativePath: 
+  absolutePath: 
+  pathRelation: 0
+  playAtStart: 1
+  loopPlay: 1
+  playbackFPS: 30
+  playbackEvents:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &920692798
 GameObject:
   m_ObjectHideFlags: 0
@@ -6466,6 +6512,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 924641072}
+  - component: {fileID: 924641074}
+  - component: {fileID: 924641073}
   m_Layer: 0
   m_Name: GSS_Player
   m_TagString: Untagged
@@ -6486,8 +6534,53 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &924641073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924641071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0885a5fe3a56cf04690a8fc44a1380a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentTransform: {fileID: 924641072}
+  bufferSize: 30
+  useAllThreads: 1
+  threadCount: 4
+  pointcloudMaterial: {fileID: 2100000, guid: bbcad6c3341b77645b06192a47c07027, type: 2}
+  meshMaterial: {fileID: 2100000, guid: da8d29e60762f8c4d885f92ca00fc376, type: 2}
+  frameDropped: 0
+  currentFrameIndex: 0
+  targetFrameTimeMs: 0
+  elapsedMsSinceLastFrame: 0
+  smoothedFPS: 0
+  texture: {fileID: 0}
+--- !u!114 &924641074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924641071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2731264125d1524693cb97001b1cfc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  relativePath: 
+  absolutePath: 
+  pathRelation: 0
+  playAtStart: 1
+  loopPlay: 1
+  playbackFPS: 30
+  playbackEvents:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &934945316
 GameObject:
   m_ObjectHideFlags: 0
@@ -8079,9 +8172,9 @@ MonoBehaviour:
   comparisionList: {fileID: 1182223901}
   podest1: {fileID: 1749471572}
   podest2: {fileID: 77414004}
-  depthkitPlayer: {fileID: 0}
-  gssPlayer1: {fileID: 0}
-  gssPlayer2: {fileID: 0}
+  depthkitPlayer: {fileID: 1296027344}
+  liveScanPlayer: {fileID: 924641071}
+  volcapPlayer: {fileID: 873122267}
   voteButton1: {fileID: 3604713247704937139}
   voteButton2: {fileID: 621584804}
   RepeatButton: {fileID: 1410784803}
@@ -8107,8 +8200,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 191418777}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1186393188
 GameObject:
@@ -8703,7 +8796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c39bca641cdaf46a71dcfdeb31fe85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_bIsSetup: 1
+  m_bIsSetup: 0
   m_parent: root
   recalculateCurrentSurfaceTriangleCount: 0
   m_subMeshMaxTriangles: 00000000
@@ -8759,6 +8852,7 @@ MonoBehaviour:
   showPerspectiveGizmo: 
   maskGenerator:
     clip: {fileID: 1296027349}
+    externalSourceTexture: {fileID: 0}
     scale: 1
     m_maskTextureFormat: 14
     useStudioCoefficients: 1
@@ -8896,7 +8990,7 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
   m_WaitForFirstFrame: 1
@@ -8972,8 +9066,8 @@ MonoBehaviour:
   showCameraFrustums: 0
   meshSource: {fileID: 1296027345}
   m_collider: {fileID: 1296027351}
-  shadowCastingMode: 1
-  receiveShadows: 1
+  shadowCastingMode: 0
+  receiveShadows: 0
   interpolateLightProbes: 1
   anchorOverride: {fileID: 0}
   lookMaterial: {fileID: 1347079606}
@@ -9011,7 +9105,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1324107722
 GameObject:

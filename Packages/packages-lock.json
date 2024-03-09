@@ -1,14 +1,13 @@
 {
   "dependencies": {
     "com.buildingvolumes.geometry_sequence_streaming": {
-      "version": "https://github.com/BuildingVolumes/Geometry_Sequence_Streaming_Package.git",
+      "version": "file:C:/Users/Christopher/Desktop/Volcapture/Visualization/Unity_Geometry_Sequence_Streaming/Geometry_Sequence_Streaming_Package",
       "depth": 0,
-      "source": "git",
+      "source": "local",
       "dependencies": {
         "com.unity.jobs": "0.70.0-preview.7",
         "com.unity.timeline": "1.6.4"
-      },
-      "hash": "7f95d1a257966ed77c61167037389f1152a99b29"
+      }
     },
     "com.microsoft.mrtk.graphicstools.unity": {
       "version": "file:MixedReality/com.microsoft.mrtk.graphicstools.unity-0.5.12.tgz",
@@ -320,17 +319,17 @@
       "url": "https://packages.unity.com"
     },
     "nyc.scatter.depthkit.core": {
-      "version": "file:../Depthkit_Packages/Depthkit_Expansion_Package_Phase9_062223/depthkit.core",
+      "version": "file:C:/Users/Christopher/Downloads/Depthkit_Expansion_Package_Phase10_021524/Depthkit_Expansion_Package_Phase10_021524/depthkit.core",
       "depth": 0,
       "source": "local",
       "dependencies": {}
     },
     "nyc.scatter.depthkit.studio": {
-      "version": "file:../Depthkit_Packages/Depthkit_Expansion_Package_Phase9_062223/depthkit.studio",
+      "version": "file:C:/Users/Christopher/Downloads/Depthkit_Expansion_Package_Phase10_021524/Depthkit_Expansion_Package_Phase10_021524/depthkit.studio",
       "depth": 0,
       "source": "local",
       "dependencies": {
-        "nyc.scatter.depthkit.core": "0.13.2"
+        "nyc.scatter.depthkit.core": "0.14.3"
       }
     },
     "org.mixedrealitytoolkit.core": {

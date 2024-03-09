@@ -24,6 +24,7 @@ public class StudyComparisions : MonoBehaviour
 public class VideoCollection
 {
     public string name;
+    public StudyManager.Sequences sequence;
     public float lengthInSeconds;
     public TextAsset DepthkitMeta;
     public Texture2D DepthkitPoster;
