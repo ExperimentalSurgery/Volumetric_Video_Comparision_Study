@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.XR;
 using BuildingVolumes.Streaming;
 using System;
 using System.IO;
@@ -63,7 +64,6 @@ public class StudyManager : MonoBehaviour
     public GameObject StudyStartHint3;
     public GameObject PostTrainingHint;
     public GameObject EndStudyHint;
-    public GameObject training;
     public GameObject Countdown;
 
     public string trainingVideoGood;
@@ -83,6 +83,8 @@ public class StudyManager : MonoBehaviour
     private void Start()
     {
         ResetStudy();
+
+        XRSettings.eyeTextureResolutionScale = 1.5f;
     }
 
     public void ResetStudy()
@@ -225,7 +227,6 @@ public class StudyManager : MonoBehaviour
         volcapPlayer.GetComponent<GeometrySequencePlayer>().Hide();
         depthkitPlayer.GetComponent<Depthkit.StudioLook>().enabled = false;
 
-
         switch (variant)
         {
             case compareVariants.DepthkitToLivescan:
@@ -353,7 +354,6 @@ public class StudyManager : MonoBehaviour
         player2.transform.localScale = posPlayer2.localScale;
         player2.transform.position += podest2Offset;
 
-        Debug.Log("Player prepared!");
     }
 
     public void PlayComparisionFromStart()
@@ -454,15 +454,15 @@ public class ComparisionVotes
 [Serializable]
 public class Vote
 {
-    public StudyManager.Sequences sequence;
-    public StudyManager.compareVariants variant;
-    public StudyManager.Candidates votedForCandidate;
+    public string sequence;
+    public string variant;
+    public string votedForCandidate;
 
     public Vote(StudyManager.Sequences sequence, StudyManager.compareVariants variant, StudyManager.Candidates votedFor)
     {
-        this.sequence = sequence;
-        this.variant = variant;
-        this.votedForCandidate = votedFor;
+        this.sequence = sequence.ToString();
+        this.variant = variant.ToString();
+        this.votedForCandidate = votedFor.ToString();
 
     }
     
